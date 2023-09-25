@@ -5,7 +5,7 @@ namespace Back.Services.Interfaces
 {
     public interface IIngredientService
     {
-        Task<IngredientDTO> AddIngredient(IngredientDTO ingredient);
+        Task<IngredientDTO> AddIngredient(NewIngredientDTO ingredient);
         Task<List<IngredientDTO>> GetAll();
         Task DeleteIngredient(int ingredientId);
     }

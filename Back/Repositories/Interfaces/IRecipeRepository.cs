@@ -9,6 +9,7 @@ namespace Back.Repositories.Interfaces
         Task DeleteRecipe(int recipeId);
         Task<List<Recipe>> GetAllRecipes();
         Task<List<Recipe>> GetMyRecipes(int userId);
-        //Task<Recipe> AddRecipeToCollection(int recipeId);
+        Task<List<Recipe>> GetSavedRecipes(int userId);
+        Task<Recipe> AddRecipeToCollection(int recipeId, int userId);
     }
 }

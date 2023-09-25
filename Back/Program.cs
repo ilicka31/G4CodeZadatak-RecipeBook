@@ -15,7 +15,7 @@ namespace Back
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static  void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             string _cors = "cors";
@@ -93,6 +93,7 @@ namespace Back
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IRecipeService, RecipeService>();
             builder.Services.AddScoped<IIngredientService, IngredientService>();
+            builder.Services.AddScoped<IAdminInitializer, AdminInitializer>();
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -102,6 +103,12 @@ namespace Back
             builder.Services.AddSingleton(mapper);
 
             var app = builder.Build();
+
+          /*  using (var scope = app.Services.CreateScope())
+            {
+                // koristi se za inicijalizaciju podataka
+              scope.ServiceProvider.GetRequiredService<IAdminInitializer>().InitializeUserData();
+            }*/
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

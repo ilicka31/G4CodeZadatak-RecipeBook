@@ -1,4 +1,5 @@
-﻿using Back.Models;
+﻿using Back.DTOs.Ingredient;
+using Back.Models;
 
 namespace Back.DTOs.Recipe
 {
@@ -6,7 +7,7 @@ namespace Back.DTOs.Recipe
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Back.Models.Ingredient> Ingredients { get; set; }
-        public int UserId { get; set; }
+        public List<IngredientDTO> Ingredients { get; set; }
+       
     }
 }

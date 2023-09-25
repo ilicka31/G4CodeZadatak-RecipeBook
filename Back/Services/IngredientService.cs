@@ -17,10 +17,10 @@ namespace Back.Services
             _ingredientRepository = ingredientRepository;
             _mapper = mapper;
         }
-        public async Task<IngredientDTO> AddIngredient(IngredientDTO ingredient)
+        public async Task<IngredientDTO> AddIngredient(NewIngredientDTO ingredient)
         {
-            await _ingredientRepository.AddIngredient(_mapper.Map<Ingredient>(ingredient));
-            return ingredient;
+           var i = await _ingredientRepository.AddIngredient(_mapper.Map<Ingredient>(ingredient));
+            return _mapper.Map<IngredientDTO>(i);
         }
         public async Task DeleteIngredient(int ingredientId)
         {

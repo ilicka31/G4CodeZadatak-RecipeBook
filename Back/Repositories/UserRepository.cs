@@ -24,6 +24,11 @@ namespace Back.Repositories
 
         public async Task<List<User>> GetAllCooks()
         {
+            return await _dbContext.Users.Where(x=> x.UserRole == Role.COOK).ToListAsync();
+        }
+
+        public async Task<List<User>> GetAll()
+        {
             return await _dbContext.Users.ToListAsync();
         }
         public async Task<User> GetByEmail(string email)

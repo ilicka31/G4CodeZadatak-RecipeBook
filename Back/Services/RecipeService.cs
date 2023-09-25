@@ -6,6 +6,7 @@ using Back.Services.Interfaces;
 
 namespace Back.Services
 {
+    // getovanje sastojaka i cuvanje recepta!!
     public class RecipeService : IRecipeService
     {
         private readonly IRecipeRepository _recipeRepository;
@@ -17,16 +18,19 @@ namespace Back.Services
             _mapper = mapper;
         }
 
-        public async Task<RecipeDTO> AddRecipe(RecipeDTO recipe)
+        public async Task<RecipeDTO> AddRecipe(RecipeDTO recipe, int userId)
         {
-           await _recipeRepository.AddRecipe(_mapper.Map<Recipe>(recipe));
+            var r = _mapper.Map<Recipe>(recipe);
+            r.IdUser = userId;
+            
+            await _recipeRepository.AddRecipe(r);
             return recipe;
 
         }
 
-        public Task<RecipeDTO> AddRecipeToCollection(int recipeId)
+        public async Task<RecipeDTO> AddRecipeToCollection(int recipeId, int userId)
         {
-            throw new NotImplementedException();
+           return  _mapper.Map<RecipeDTO>(await _recipeRepository.AddRecipeToCollection(recipeId, userId));
         }
 
         public async Task DeleteRecipe(int recipeId)
@@ -42,6 +46,11 @@ namespace Back.Services
         public async Task<List<RecipeDTO>> GetMyRecipes(int id)
         {
             return _mapper.Map<List<RecipeDTO>>(await _recipeRepository.GetMyRecipes(id));
+        }
+
+        public async Task<List<RecipeDTO>> GetSavedRecipes(int id)
+        {
+            return _mapper.Map<List<RecipeDTO>>(await _recipeRepository.GetSavedRecipes(id));
         }
     }
 }

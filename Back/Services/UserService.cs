@@ -23,7 +23,10 @@ namespace Back.Services
             _mapper = mapper;
             _secretKey = configuration.GetSection("SecretKey");
         }
-
+        public int GetUserId(ClaimsPrincipal claim)
+        {
+            return int.Parse(claim.Claims.First(i => i.Type == "UserID").Value);
+        }
         public async Task<UserGetDTO> AddCook(UserRegisterDTO cook)
         {
             var user = await _userRepository.GetByEmail(cook.Email);
@@ -37,6 +40,11 @@ namespace Back.Services
             //     newUser.UserRole = Role.COOK;
             await _userRepository.AddCook(newUser);
             return _mapper.Map<UserGetDTO>(newUser);
+        }
+
+        public async Task<List<UserGetDTO>> GetAll()
+        {
+            return _mapper.Map<List<UserGetDTO>>(await _userRepository.GetAll());
         }
 
         public async Task<List<UserGetDTO>> GetAllCooks()
@@ -69,7 +77,7 @@ namespace Back.Services
             {
                 userClaims.Add(new Claim(ClaimTypes.Role, "USER"));
             }
-            userClaims.Add(new Claim("UserID", user.Id.ToString()));
+            userClaims.Add(new Claim("UserID", user.UserId.ToString()));
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey.Value));
             var signinCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var tokenOptions = new JwtSecurityToken(

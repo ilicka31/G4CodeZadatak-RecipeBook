@@ -17,6 +17,7 @@ namespace Back.Repositories
         public async Task<Ingredient> AddIngredient(Ingredient ingredient)
         {
             await _dbContext.Ingredients.AddAsync(ingredient);
+            await _dbContext.SaveChangesAsync();
             return ingredient;
         }
 
