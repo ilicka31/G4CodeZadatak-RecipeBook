@@ -8,6 +8,7 @@ namespace Back.Repositories.Interfaces
         Task<Ingredient> AddIngredient(Ingredient ingredient);
         Task<List<Ingredient>> GetAll();
         Task DeleteIngredient(int ingredientId);
+        Task<Ingredient> GetById(int ingredientId);
 
     }
 }

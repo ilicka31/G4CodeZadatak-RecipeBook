@@ -7,6 +7,8 @@ namespace Back.Repositories.Interfaces
     {
         Task<User> AddCook(User cook);
         Task<List<User>> GetAllCooks();
+        Task<User> GetByEmail(string email);
         Task<User> Register(User user);
+
     }
 }

@@ -26,6 +26,11 @@ namespace Back.Repositories
         {
             return await _dbContext.Users.ToListAsync();
         }
+        public async Task<User> GetByEmail(string email)
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+        }
+
 
         public async Task<User> Register(User user)
         {

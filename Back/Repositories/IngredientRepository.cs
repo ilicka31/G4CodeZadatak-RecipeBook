@@ -34,5 +34,10 @@ namespace Back.Repositories
         {
             return await _dbContext.Ingredients.ToListAsync();
         }
+
+        public async Task<Ingredient> GetById(int ingredientId)
+        {
+            return await _dbContext.Ingredients.FirstOrDefaultAsync(x => x.IngredientId == ingredientId);
+        }
     }
 }
