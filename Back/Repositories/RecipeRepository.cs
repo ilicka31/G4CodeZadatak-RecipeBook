@@ -56,18 +56,18 @@ namespace Back.Repositories
 
         public async Task<List<Recipe>> GetAllRecipes()
         {
-            return await _dbContext.Recipes.Include(x => x.Ingredients). ToListAsync();
+            return await _dbContext.Recipes.Include(x => x.Ingredients).ToListAsync();
         }
 
         public async Task<List<Recipe>> GetMyRecipes(int userId)
         {
-            var r = _dbContext.Recipes.Where(x => x.IdUser == userId);
-            return await r.ToListAsync();
+            var u = await _dbContext.Users.Include(x => x.Recipes).ThenInclude(r=> r.Ingredients).FirstOrDefaultAsync(x => x.UserId == userId);
+            return u.Recipes;
         }
 
         public async Task<List<Recipe>> GetSavedRecipes(int userId)
         {
-            var u = await _dbContext.Users.Include(x=> x.SavedRecipes).FirstOrDefaultAsync(x => x.UserId == userId);
+            var u = await _dbContext.Users.Include(x=> x.SavedRecipes).ThenInclude(r => r.Ingredients).FirstOrDefaultAsync(x => x.UserId == userId);
 
             if (u.SavedRecipes == null)
                 return null;
