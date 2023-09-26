@@ -1,0 +1,43 @@
+<app-toolbar></app-toolbar>
+<div class="grid-container">
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile  colspan="2" rowspan="1.5">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          
+          <mat-card-title *ngIf="userRole === 'COOK' || userRole === 'ADMIN'" >
+             <h2>{{title}}</h2>
+              <button mat-icon-button class="more-button" aria-label="Toggle menu" value="ADD NEW RECIPE" (click)="openAddModal()">
+              <mat-icon>note_add</mat-icon>
+              </button>    
+          </mat-card-title>
+
+          <mat-card-title *ngIf="userRole === 'USER' || userRole === undefined || userRole === null" >
+            <h2>RECIPES</h2>
+          </mat-card-title>
+
+        </mat-card-header>
+
+        <mat-card-content class="dashboard-card-content"  *ngIf="userRole === undefined || userRole === null || userRole === 'USER' ">
+         <div *ngFor="let recipe of allRecipes">
+          <app-expand [title] = "recipe.name" [description]="recipe.description" [ingredients]="recipe.ingredients" [userRole]="userRole"></app-expand>
+        </div>
+        </mat-card-content>
+
+        <mat-card-content class="dashboard-card-content"  *ngIf="userRole === 'COOK'">
+          <div *ngFor="let recipe of allRecipes">
+           <app-expand [title] = "recipe.name" [recipeId]="recipe.recipeId" [description]="recipe.description" [ingredients]="recipe.ingredients" [userRole]="userRole" [recipeType]="recipeType"></app-expand>
+         </div>
+        </mat-card-content>
+
+        <mat-card-content class="dashboard-card-content"  *ngIf="userRole === 'ADMIN'">
+          <div *ngFor="let recipe of allRecipes">
+           <app-expand [title] = "recipe.name" [recipeId]="recipe.recipeId" [description]="recipe.description" [ingredients]="recipe.ingredients" [userRole]="userRole"></app-expand>
+         </div>
+        </mat-card-content>
+
+       
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Back.DTOs;
 using Back.DTOs.User;
 using Back.Models;
 using Back.Repositories.Interfaces;
@@ -52,7 +53,7 @@ namespace Back.Services
             return _mapper.Map<List<UserGetDTO>>(await _userRepository.GetAllCooks());
         }
 
-        public async Task<string> Login(UserLoginDTO userLoginDTO)
+        public async Task<TokenDTO> Login(UserLoginDTO userLoginDTO)
         {
             var user = await _userRepository.GetByEmail(userLoginDTO.Email);
             if (user == null)
@@ -88,7 +89,7 @@ namespace Back.Services
                 );
             string tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
-            return tokenString;
+            return new TokenDTO() { Token = tokenString, UserRole = user.UserRole.ToString() };
         }
 
         public async Task<UserGetDTO> Register(UserRegisterDTO userRegisterDTO)

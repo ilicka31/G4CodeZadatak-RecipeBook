@@ -1,0 +1,30 @@
+<mat-toolbar color="primary" class="app-header">
+    <span class="nav-tool-items">
+      <a mat-button routerLink="/main" routerLinkActive="active">ALL RECIPES</a>
+      <ng-container *ngIf="userRole === 'ADMIN'">
+        
+        <a mat-button routerLink="/cooks" routerLinkActive="active">ALL COOKS</a>
+        <a mat-button routerLink="/ingredients" routerLinkActive="active">ALL INGREDIENTS</a>
+      </ng-container>
+      <ng-container *ngIf="userRole === 'COOK'">
+       
+        <a mat-button routerLink="/my-recipes" routerLinkActive="active">MY RECIPES</a>
+
+      </ng-container>
+      <ng-container *ngIf="userRole === 'USER'">
+    
+        <a mat-button routerLink="/saved-recipes" routerLinkActive="active">SAVED RECIPES</a>
+      </ng-container>
+    </span>
+    <span class="flex-spacer"></span>
+    <span>
+      <ng-container *ngIf="userRole === '' || userRole === null || userRole === undefined;  else elseBlock">
+        <a mat-button routerLink="/login"  routerLinkActive="active">LOGIN/SINGUP</a>
+      </ng-container>
+    
+    <ng-template #elseBlock>
+      <a mat-button routerLink="/login" (click)="logout()" routerLinkActive="active">LOGOUT</a>
+      
+    </ng-template>
+    </span>
+  </mat-toolbar>

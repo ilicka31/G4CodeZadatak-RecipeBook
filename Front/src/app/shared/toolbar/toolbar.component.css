@@ -1,0 +1,7 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .flex-spacer {
+    flex: 1;
+  }

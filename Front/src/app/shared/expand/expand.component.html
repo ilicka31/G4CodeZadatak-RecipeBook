@@ -1,0 +1,29 @@
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+        {{title}}
+        </mat-panel-title>
+        <mat-panel-description>
+        {{description}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <div *ngFor="let i of ingredients" class="ingredient-item">
+        <div class="ingredient-info">
+          <label>Name: {{i.name}} Quantity: {{i.quantity}} Measurement unit: {{i.mUnit}}</label>
+        </div>
+       
+      </div>
+      <div class="delete-button" *ngIf="(userRole === 'COOK' && recipeType === 'my') || userRole === 'ADMIN'  ">
+        <button mat-button color="warn" (click)="deleteRecipe(recipeId)">DELETE</button>
+      </div>
+      <div class="delete-button" *ngIf="userRole === 'USER' ">
+        <button mat-button  (click)="saveRecipe(recipeId)">SAVE
+          <mat-icon>bookmark</mat-icon>
+        </button>
+      </div>
+         
+    </mat-expansion-panel>
+  </mat-accordion>
+  

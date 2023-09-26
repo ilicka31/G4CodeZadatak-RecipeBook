@@ -21,6 +21,7 @@ namespace Back.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
         {
+            userRegisterDTO.UserRole = Models.Role.USER;
             try
             {
                 return Ok(await _userService.Register(userRegisterDTO));
@@ -37,6 +38,7 @@ namespace Back.Controllers
         [HttpPost("add-cook")]
         public async Task<IActionResult> AddCook(UserRegisterDTO userRegisterDTO)
         {
+            userRegisterDTO.UserRole = Models.Role.COOK;
             try
             {
                 return Ok(await _userService.AddCook(userRegisterDTO));
@@ -81,7 +83,8 @@ namespace Back.Controllers
             TokenDTO token = new TokenDTO();
             try
             {
-                token.Token = await _userService.Login(userLoginDTO);
+                token= await _userService.Login(userLoginDTO);
+                
             }
             catch (Exception e)
             {

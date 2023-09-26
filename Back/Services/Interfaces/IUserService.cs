@@ -1,4 +1,5 @@
-﻿using Back.DTOs.User;
+﻿using Back.DTOs;
+using Back.DTOs.User;
 using System.Security.Claims;
 
 namespace Back.Services.Interfaces
@@ -9,7 +10,7 @@ namespace Back.Services.Interfaces
         Task<List<UserGetDTO>> GetAllCooks();
         Task<List<UserGetDTO>> GetAll();
         Task<UserGetDTO> Register(UserRegisterDTO userRegisterDTO);
-        Task<string> Login(UserLoginDTO userLoginDTO);
+        Task<TokenDTO> Login(UserLoginDTO userLoginDTO);
         int GetUserId(ClaimsPrincipal claim);
 
     }

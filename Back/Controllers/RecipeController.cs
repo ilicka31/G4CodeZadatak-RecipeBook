@@ -29,6 +29,7 @@ namespace Back.Controllers
 
 
         [HttpPost("add")]
+        [Authorize(Roles = "COOK")]
         public async Task<IActionResult> AddRecipe(RecipeDTO recipeDTO)
         {
             try
@@ -88,7 +89,7 @@ namespace Back.Controllers
 
         }
 
-        [HttpGet("save-recipe")]
+        [HttpPost("save-recipe")]//treba post???
         public async Task<IActionResult> SaveRecipe(int recipeId)
         {
             try
@@ -105,7 +106,7 @@ namespace Back.Controllers
 
 
         [Authorize(Roles = "ADMIN, COOK")]
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{recipeId}")]
         public async Task<IActionResult> DeleteRecipe(int recipeId)
         {
             try
