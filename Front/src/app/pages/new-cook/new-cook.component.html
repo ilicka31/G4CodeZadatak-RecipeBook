@@ -1,0 +1,39 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>ADD COOK</mat-card-title>
+      </mat-card-header>
+  
+      <form class="example-form" #cookForm="ngForm" (ngSubmit)="onSubmit(cookForm.value)">
+  
+        <mat-card-content>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Fullname</mat-label>
+            <input matInput placeholder="Fullname" name="fullname" required ngModel>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" name="email" required ngModel>
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password" name="password"  required ngModel>
+          </mat-form-field>
+  
+          <mat-form-field class="example-full-width">
+            <mat-label>Role</mat-label>
+            <mat-select [(ngModel)]="selectedOption" name="role" >
+              <mat-option value="COOK">COOK</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+        </mat-card-content>
+        <button mat-stroked-button color="primary" [disabled]="cookForm.invalid" class="btn-block">ADD</button>
+       
+      </form>
+    
+    </mat-card>
+  </div>
