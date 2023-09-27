@@ -21,7 +21,7 @@ namespace Back.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
         {
-            userRegisterDTO.UserRole = Models.Role.USER;
+         //   userRegisterDTO.UserRole = Models.Role.USER;
             try
             {
                 return Ok(await _userService.Register(userRegisterDTO));

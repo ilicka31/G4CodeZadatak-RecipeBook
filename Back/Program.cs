@@ -106,7 +106,7 @@ namespace Back
 
           /*  using (var scope = app.Services.CreateScope())
             {
-                // koristi se za inicijalizaciju podataka
+                
               scope.ServiceProvider.GetRequiredService<IAdminInitializer>().InitializeUserData();
             }*/
 

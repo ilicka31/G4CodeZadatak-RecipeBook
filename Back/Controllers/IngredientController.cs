@@ -20,9 +20,7 @@ namespace Back.Controllers
             _ingredientService = ingredientService;
             _userService = userService;
         }
-        /*  Task<IngredientDTO> AddIngredient(IngredientDTO ingredient);
-        Task<List<IngredientDTO>> GetAll();
-        Task DeleteIngredient(int ingredientId);*/
+    
         [Authorize(Roles ="ADMIN")]
         [HttpPost("add")]
         public async Task<IActionResult> AddIngredient(NewIngredientDTO ingredientDTO)
@@ -37,7 +35,7 @@ namespace Back.Controllers
             }
 
         }
-        [Authorize(Roles = "ADMIN, COOK")]
+     //   [Authorize(Roles = "ADMIN, COOK")]
         [HttpGet("all")]
         public async Task<IActionResult> AllIngredients()
         {
@@ -52,7 +50,7 @@ namespace Back.Controllers
 
         }
         [Authorize(Roles = "ADMIN")]
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteIngredient(int id)
         {
             try

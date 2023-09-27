@@ -3,6 +3,7 @@ using Back.DTOs.Recipe;
 using Back.Models;
 using Back.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 
 namespace Back.Repositories
@@ -47,11 +48,20 @@ namespace Back.Repositories
         public async Task DeleteRecipe(int recipeId)
         {
             var r = await _dbContext.Recipes.FirstOrDefaultAsync(x => x.RecipeId == recipeId);
+            var relatedUserSavedRecipes = _dbContext.UserSavedRecipes.Where(ur => ur.RecipeId == recipeId).ToList();
+            _dbContext.UserSavedRecipes.RemoveRange(relatedUserSavedRecipes);
+
             if (r != null)
             {
                 _dbContext.Recipes.Remove(r);
                 await _dbContext.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<Recipe>> FilterRecipes(List<Ingredient> ingredients)
+        {
+     
+            return await _dbContext.Recipes.Include(x => x.Ingredients).Where(recipe => recipe.Ingredients.Any(ingredient => ingredients.Contains(ingredient))).ToListAsync();
         }
 
         public async Task<List<Recipe>> GetAllRecipes()
@@ -65,6 +75,14 @@ namespace Back.Repositories
             return u.Recipes;
         }
 
+        public async Task<List<Recipe>> GetNotSavedRecipes(int userId)
+        {
+            var savedRecipeIds = await _dbContext.Users.Where(x => x.UserId == userId).SelectMany(x => x.SavedRecipes.Select(r => r.RecipeId)).ToListAsync();
+            var recipesNotSavedByUser = await _dbContext.Recipes.Where(recipe => !savedRecipeIds.Contains(recipe.RecipeId)).Include(x=> x.Ingredients).ToListAsync();
+           
+            return recipesNotSavedByUser;
+        }
+
         public async Task<List<Recipe>> GetSavedRecipes(int userId)
         {
             var u = await _dbContext.Users.Include(x=> x.SavedRecipes).ThenInclude(r => r.Ingredients).FirstOrDefaultAsync(x => x.UserId == userId);
@@ -72,6 +90,11 @@ namespace Back.Repositories
             if (u.SavedRecipes == null)
                 return null;
             return u.SavedRecipes;
+        }
+
+        public async Task<List<Recipe>> SearchRecipes(string search)
+        {
+            return await _dbContext.Recipes.Where(x=> x.Name.Contains(search)).Include(x => x.Ingredients).ToListAsync();
         }
     }
 }

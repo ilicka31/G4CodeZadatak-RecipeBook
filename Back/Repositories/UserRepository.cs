@@ -18,7 +18,7 @@ namespace Back.Repositories
         public async Task<User> AddCook(User cook)
         {
             await _dbContext.Users.AddAsync(cook);
-            await _dbContext.SaveChangesAsync(); // proveri treba li
+            await _dbContext.SaveChangesAsync(); 
             return cook;
         }
 

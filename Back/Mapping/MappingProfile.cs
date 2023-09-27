@@ -16,7 +16,7 @@ namespace Back.Mapping
 
         
             CreateMap<RecipeDTO, Recipe>().ReverseMap();
-            //.ForMember(dest => dest.Ingredients, opt => opt.MapFrom(src => src.Ingredients))
+          
 
             CreateMap<Ingredient, IngredientDTO>().ReverseMap();
             CreateMap<Ingredient, NewIngredientDTO>().ReverseMap();

@@ -38,7 +38,7 @@ namespace Back.Services
 
             User newUser = _mapper.Map<User>(cook);
             newUser.Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password);
-            //     newUser.UserRole = Role.COOK;
+           
             await _userRepository.AddCook(newUser);
             return _mapper.Map<UserGetDTO>(newUser);
         }
@@ -102,7 +102,7 @@ namespace Back.Services
           
             User newUser = _mapper.Map<User>(userRegisterDTO);
             newUser.Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password);
-       //     newUser.UserRole = Role.USER;
+      
             await _userRepository.Register(newUser);
             return _mapper.Map<UserGetDTO>(newUser);
         }

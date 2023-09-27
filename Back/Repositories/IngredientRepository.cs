@@ -23,12 +23,11 @@ namespace Back.Repositories
 
         public async Task DeleteIngredient(int ingredientId)
         {
-         var i = await _dbContext.Ingredients.FirstOrDefaultAsync(x => x.IngredientId == ingredientId); 
-            if (i != null)
-            {
+             var i = await _dbContext.Ingredients.FirstOrDefaultAsync(x => x.IngredientId == ingredientId); 
+          
                 _dbContext.Ingredients.Remove(i);
                 await _dbContext.SaveChangesAsync();    
-            }
+            
         }
 
         public async Task<List<Ingredient>> GetAll()

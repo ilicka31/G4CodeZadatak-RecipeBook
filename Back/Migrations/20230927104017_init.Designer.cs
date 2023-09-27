@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Back.Migrations
 {
     [DbContext(typeof(RecipeDbContext))]
-    [Migration("20230925195241_init")]
+    [Migration("20230927104017_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -147,13 +147,13 @@ namespace Back.Migrations
                     b.HasOne("Back.Models.Ingredient", null)
                         .WithMany()
                         .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Back.Models.Recipe", null)
                         .WithMany()
                         .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

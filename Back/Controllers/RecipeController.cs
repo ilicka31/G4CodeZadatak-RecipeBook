@@ -1,5 +1,7 @@
-﻿using Back.DTOs.Recipe;
+﻿using Back.DTOs.Ingredient;
+using Back.DTOs.Recipe;
 using Back.DTOs.User;
+using Back.Models;
 using Back.Services;
 using Back.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -20,13 +22,6 @@ namespace Back.Controllers
             _recipeService = recipeService;
             _userService = userService;
         }
-
-
-
-        /*Task<RecipeDTO> AddRecipe(RecipeDTO recipe);
-       
-        Task<RecipeDTO> AddRecipeToCollection(int recipeId);*/
-
 
         [HttpPost("add")]
         [Authorize(Roles = "COOK")]
@@ -73,8 +68,22 @@ namespace Back.Controllers
             }
 
         }
+        [Authorize(Roles = "USER")]
+        [HttpGet("other")]
+        public async Task<IActionResult> NotSavedRecipes()
+        {
+            try
+            {
+                return Ok(await _recipeService.GetNotSavedRecipes(_userService.GetUserId(User)));
+            }
+            catch (Exception e)
+            {
+                return Conflict(e.Message);
+            }
 
-        //[Authorize(Roles = "ADMIN")] ovo svi mogu
+        }
+
+ 
         [HttpGet("all-recipes")]
         public async Task<IActionResult> AllRecepies()
         {
@@ -89,7 +98,21 @@ namespace Back.Controllers
 
         }
 
-        [HttpPost("save-recipe")]//treba post???
+        [HttpGet("search-recipes/{search}")]
+        public async Task<IActionResult> SearchRecepies(string search)
+        {
+            try
+            {
+                return Ok(await _recipeService.SearchRecipes(search));
+            }
+            catch (Exception e)
+            {
+                return Conflict(e.Message);
+            }
+
+        }
+
+        [HttpPost("save-recipe/{recipeid}")]
         public async Task<IActionResult> SaveRecipe(int recipeId)
         {
             try
@@ -116,6 +139,24 @@ namespace Back.Controllers
             }
             catch (Exception e)
             {
+                return Conflict(e.Message);
+            }
+
+        }
+
+        [HttpPost("filter")]
+        public async Task<IActionResult> FilterRecipe([FromBody]List<IngredientDTO> ingredients)
+        {
+            try
+            {
+                var x = await _recipeService.FilterRecipes(ingredients);
+                if (x == null)
+                    return Ok(await _recipeService.GetAllRecipes());
+            return Ok(x);
+            }
+            catch (Exception e)
+            {
+
                 return Conflict(e.Message);
             }
 
