@@ -23,16 +23,10 @@
   h2{
     align-self: center;
   }
-  .list-item {
+
+  .flex-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-  }
-  
-  .flex-grow {
-    flex-grow: 1; /* This will make the text expand and push the button to the right */
-  }
-  
-  .delete-button {
-    margin-left: 8px; /* Optional: Add some margin to separate the button from the text */
   }
   

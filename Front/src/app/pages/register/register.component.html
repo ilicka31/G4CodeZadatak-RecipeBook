@@ -1,7 +1,7 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Register</mat-card-title>
+        <mat-card-title>REGISTER</mat-card-title>
       </mat-card-header>
   
       <form class="example-form" #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm.value)">
@@ -35,5 +35,6 @@
        
       </form>
       <a mat-button routerLink="/login" routerLinkActive="active" class="example-full-width" > Have an acount? Log in!</a>
+      <button mat-raised-button color="primary" routerLink="/main" routerLinkActive="active" class="example-full-width" > HOME</button>
     </mat-card>
   </div>

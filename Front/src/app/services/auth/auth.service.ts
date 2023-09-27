@@ -44,7 +44,7 @@ export class AuthService {
      { this.token.next(null);
     } else {
       let parsedToken = JSON.parse(token);
-      this.token.next(parsedToken.token);
+      this.token.next(parsedToken);
     }
   }
   getUserRole(){
@@ -53,6 +53,7 @@ export class AuthService {
      { this.token.next(null);
     } else {
       let parsedToken = JSON.parse(token);
+    
       return parsedToken.userRole;
     }
   }

@@ -20,6 +20,10 @@ import { NewRecipeComponent } from './pages/new-recipe/new-recipe.component';
 import { ExpandComponent } from './shared/expand/expand.component';
 import { ExpandCookComponent } from './shared/expand-cook/expand-cook.component';
 import { ListIngredientComponent } from './shared/list-ingredient/list-ingredient.component';
+import { NewIngredientComponent } from './pages/new-ingredient/new-ingredient.component';
+import { NewCookComponent } from './pages/new-cook/new-cook.component';
+import { SearchBarComponent } from './shared/search-bar/search-bar.component';
+import { FilterBarComponent } from './shared/filter-bar/filter-bar.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { ListIngredientComponent } from './shared/list-ingredient/list-ingredien
     NewRecipeComponent,
     ExpandComponent,
     ExpandCookComponent,
-    ListIngredientComponent
+    ListIngredientComponent,
+    NewIngredientComponent,
+    NewCookComponent,
+    SearchBarComponent,
+    FilterBarComponent
   ],
   imports: [
     BrowserModule,

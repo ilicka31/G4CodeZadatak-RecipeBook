@@ -20,7 +20,7 @@ export class FilterBarComponent implements OnInit {
    ngOnInit(): void {
       this._ingredientService.allIngredients().subscribe(
         (data: any) => {
-          this.ingredients = data; // Populate the ingredients array with the data from the observable
+          this.ingredients = data; 
         },
         (error) => {
           console.error('Error fetching ingredients:', error);

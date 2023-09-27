@@ -6,6 +6,7 @@ import { RecipeModalService } from 'src/app/services/modals/recipe-modal.service
 import { RecipeGet } from 'src/app/models/recipe/recipe-get.model';
 import { RecipeService } from 'src/app/services/recipe/recipe.service';
 import { ActivatedRoute } from '@angular/router';
+import { Recipe } from 'src/app/models/recipe/recipe.model';
 
 @Component({
   selector: 'app-dash',
@@ -28,18 +29,27 @@ export class DashComponent implements OnInit{
    const recipeType = this.route.snapshot.data['recipeType'];
    this.recipeType= recipeType;
    this.userRole= this.auth.getUserRole();
-   if(recipeType ==='all'){
+   if(recipeType ==='all' && this.userRole === 'USER'){
+    this.title= "ALL RECIPES";
+    this._recipeService.notSavedRecipes().subscribe(
+      (response: any) => {
+        this.allRecipes = response;
+        
+      },
+      (error) => {
+       
+      }
+    );
+  }
+   else if(recipeType ==='all' ){
     this.title= "ALL RECIPES";
    this._recipeService.allRecipes().subscribe(
     (response: any) => {
       this.allRecipes = response;
      
     },
-    (error) => {
-      
-    }
-  );
-  }
+    (error) => {});
+  } 
   else if(recipeType ==='my'){
     this.title= "MY RECIPES";
     this._recipeService.myRecipes().subscribe(
@@ -51,9 +61,26 @@ export class DashComponent implements OnInit{
        
       }
     );
-  }}
-  changePassword(){}
-  /** Based on the screen size, switch from standard to one column per row */
+  }
+  else if(recipeType ==='saved'){
+    this.title= "SAVED RECIPES";
+    this._recipeService.savedRecipes().subscribe(
+      (response: any) => {
+        this.allRecipes = response;
+        
+      },
+      (error) => {
+       
+      }
+    );
+  }
+
+}
+onRecipesChanged(newRecipes: RecipeGet[]){
+this.allRecipes= newRecipes;
+console.log(this.allRecipes);
+}
+ 
   openAddModal(){
     this._modalService.openModal();
   }

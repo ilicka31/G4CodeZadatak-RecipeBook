@@ -23,3 +23,7 @@
 h2{
   align-self: center;
 }
+.searchFilter{
+  display: flex;
+  justify-content: space-between
+}

@@ -22,7 +22,7 @@ export class InterceptorService {
 
        let modifiedReq = req.clone({
          setHeaders: {
-           'Authorization' :  'Bearer ' + token,
+           'Authorization' :  'Bearer ' + token.token,
          }
        })
 

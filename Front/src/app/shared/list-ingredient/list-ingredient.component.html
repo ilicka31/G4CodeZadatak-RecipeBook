@@ -6,27 +6,26 @@
                 <mat-card-header>
                     <mat-card-title >
                         <h2>ALL INGREDIENT</h2>
-                        <button mat-icon-button class="more-button" aria-label="Toggle menu" value="ADD NEW RECIPE" (click)="openAddModal()">
+                        <button mat-icon-button class="more-button" aria-label="Toggle menu" value="ADD NEW RECIPE" (click)="openAddIngredientModal()">
                             <mat-icon>note_add</mat-icon>
                             </button>    
                    </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
-                    <mat-list>
-                        <ng-container *ngFor="let cook of ingredients">
-                          <mat-list-item class="list-item">
-                            <span class="flex-grow">{{ cook.name }}  QUANTITY: {{cook.quantity}}  M.UNIT: {{cook.mUnit}}</span>
-                            <button class="delete-button" mat-button color="warn" (click)="deleteIngredient(cook.ingredientId)">DELETE</button>
-                          </mat-list-item>
-                          <mat-divider></mat-divider>
-                        </ng-container>
-                      </mat-list>
-                      
-                      
-                      
-                      
-                      
+                  <mat-list>
+                    <ng-container *ngFor="let cook of ingredients">
+                      <mat-list-item>
+                        <div class="flex-container">
+                          <span>{{ cook.name }} {{ cook.quantity }}{{ units[cook.mUnit] }}</span>
+                          <button mat-button color="warn" (click)="deleteIngredient(cook.ingredientId)">DELETE</button>
+                        </div>
+                      </mat-list-item>
+                      <mat-divider></mat-divider>
+                    </ng-container>
+                  </mat-list>
                 </mat-card-content>
+                
+                
             </mat-card>
         </mat-grid-tile>
   </mat-grid-list>

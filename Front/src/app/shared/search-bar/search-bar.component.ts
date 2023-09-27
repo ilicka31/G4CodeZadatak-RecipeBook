@@ -9,10 +9,11 @@ import { RecipeService } from 'src/app/services/recipe/recipe.service';
 })
 export class SearchBarComponent {
  @Output() recipes : EventEmitter<RecipeGet[]> = new EventEmitter<RecipeGet[]>();
+
  constructor(private _recipeService: RecipeService){}
 
   search(formValue: any){
-
+    
     if(formValue.search !== null){
       this._recipeService.searchRecipes(formValue.search).subscribe(
       (response)=>{

@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="login-wrapper">
     <mat-card class="box">
       <mat-card-header>
-        <mat-card-title>Add new recipe</mat-card-title>
+        <mat-card-title>ADD NEW RECIPE</mat-card-title>
       </mat-card-header>
       <mat-card-content>
       <form (ngSubmit)="saveRecipe(recipeForm.value)" #recipeForm="ngForm">
@@ -14,8 +14,14 @@
             <mat-label>Description: </mat-label>
             <input matInput type="text" placeholder="Description" required  name="description" ngModel>
           </mat-form-field>
+          
+          <mat-selection-list #ingredient name="ingredients"  [(ngModel)]="selectedIngredients" required>
+            <mat-list-option *ngFor="let ing of ingredients" [value]="ing">
+              {{ing.name}} {{ing.quantity}}{{units[ing.mUnit]}}
+            </mat-list-option>
+          </mat-selection-list>
       
-          <button mat-raised-button type="submit" color="primary" class="example-full-width" >Save changes</button>
+          <button mat-raised-button type="submit" color="primary" class="example-full-width" [disabled]="recipeForm.invalid" >ADD</button>
           </form>
       </mat-card-content>
      

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user/user-get.model';
+import { CookModalService } from 'src/app/services/modals/cook-modal.service';
+import { IngredientModalService } from 'src/app/services/modals/ingredient.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class ExpandCookComponent implements OnInit {
 cooks: User[];
-constructor(private _userService: UserService){
+constructor(private _userService: UserService, private _modalService: CookModalService ){
   this.cooks =[]
 }
   ngOnInit(): void {
@@ -22,7 +24,7 @@ constructor(private _userService: UserService){
      
       });
   }
-  openAddModal(){
-    
+  openAddCookModal(){
+    this._modalService.openModal();
   }
 }

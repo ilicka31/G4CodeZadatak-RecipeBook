@@ -49,7 +49,7 @@ export class IngredientService {
   }
 
   deleteIngredient(id: number) : Observable<any> {
-    var url = 'http://localhost:5157/api/Ingredient/delete/${id}';
+    var url = `http://localhost:5157/api/Ingredient/delete/${id}`;
 
     return this.http.delete(url).pipe(
       map(response => {
