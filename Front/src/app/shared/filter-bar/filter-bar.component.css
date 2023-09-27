@@ -1,0 +1,8 @@
+.half-width-panel {
+    margin-bottom: 1vh;
+
+  }
+  .mat-accordion{   
+    position: sticky;
+    z-index: 2;
+}

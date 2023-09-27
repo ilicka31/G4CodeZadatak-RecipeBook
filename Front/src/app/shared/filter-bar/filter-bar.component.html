@@ -1,0 +1,29 @@
+<div
+fxLayout="row"
+fxLayoutWrap
+fxLayoutGap="0.5%"
+fxLayoutAlign="center"
+fxLayout.xs="column"
+>
+<mat-accordion>
+
+    <mat-expansion-panel class="half-width-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+        Filter by:
+        </mat-panel-title>
+        <mat-panel-description>
+        INGREDIENTS
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-selection-list #ingredient name="ingredients"  [(ngModel)]="selectedIngredients" required (selectionChange)="onSelectionChange($event)">
+        <mat-list-option *ngFor="let ing of ingredients" [value]="ing">
+          {{ing.name}} {{ing.quantity}}{{units[ing.mUnit]}}
+        </mat-list-option>
+      </mat-selection-list>
+     
+ </mat-expansion-panel>
+
+  </mat-accordion> </div>
+  
